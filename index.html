@@ -4,55 +4,332 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promise Conquerors</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-brown: #2C1810;
+            --brown: #3E2723;
+            --mid-brown: #5D4037;
+            --amber: #FF8F00;
+            --orange: #FFA726;
+            --gold: #FFC107;
+            --light-gold: #FFD54F;
+            --parchment: #F5E6C8;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--dark-brown);
+            color: var(--parchment);
+            overflow-x: hidden;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(180deg, var(--dark-brown) 0%, var(--brown) 100%);
+            border-bottom: 3px solid var(--amber);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(255, 143, 0, 0.5), 0 2px 4px rgba(0,0,0,0.8);
+            font-weight: bold;
+        }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            background: var(--brown);
+            border-bottom: 2px solid var(--mid-brown);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .nav-container a {
+            color: var(--light-gold);
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-container a:hover {
+            color: var(--gold);
+            border-bottom: 2px solid var(--amber);
+            background: rgba(255, 143, 0, 0.1);
+        }
+
+        /* ===== CARRUSEL ===== */
+        .carousel-section {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            width: 400%;
+            height: 100%;
+            animation: slide 16s infinite;
+        }
+
+        .carousel-item {
+            width: 25%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(transparent, var(--dark-brown));
+        }
+
+        @keyframes slide {
+            0%   { transform: translateX(0); }
+            25%  { transform: translateX(-25%); }
+            50%  { transform: translateX(-50%); }
+            75%  { transform: translateX(-75%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* ===== SECCIONES ===== */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--amber);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-wrapper {
+            text-align: center;
+        }
+
+        /* GAME SECTION */
+        #game {
+            background: linear-gradient(135deg, var(--brown) 0%, var(--dark-brown) 100%);
+            border-radius: 8px;
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 1100px;
+            border: 1px solid var(--mid-brown);
+        }
+
+        #game p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--parchment);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* QUIENES SOMOS */
+        #quienes-somos {
+            background: linear-gradient(135deg, var(--brown) 0%, var(--dark-brown) 100%);
+            border-radius: 8px;
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 1100px;
+            border: 1px solid var(--mid-brown);
+        }
+
+        #quienes-somos p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--parchment);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark-brown);
+            border-top: 3px solid var(--amber);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-icons a {
+            color: var(--gold);
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .social-icons a:hover {
+            color: var(--amber);
+            transform: translateY(-3px);
+            text-shadow: 0 0 8px rgba(255, 143, 0, 0.6);
+        }
+
+        footer p {
+            color: var(--mid-brown);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.6rem;
+                letter-spacing: 3px;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .nav-container a {
+                padding: 0.7rem 1rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .carousel-section {
+                height: 300px;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- HUD -->
-    <div id="hud">
-        <div id="stats-panel">
-            <div class="stat-row">
-                <span class="stat-label">ARMOR DAMAGE:</span>
-                <div class="bar-container">
-                    <div id="health-bar"></div>
-                </div>
-                <span id="damage-text" class="damage-text">0%</span>
+
+    <!-- HEADER -->
+    <header>
+        <h1>Promise Conquerors</h1>
+    </header>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-container">
+            <a href="#game">Game</a>
+            <a href="#quienes-somos">Quiénes Somos</a>
+            <a href="#redes">Redes</a>
+        </div>
+    </nav>
+
+    <!-- CARRUSEL -->
+    <div class="carousel-section">
+        <div class="carousel">
+            <div class="carousel-item">
+                <img src="https://github.com/EmayFlor/PROMISE-CONQUERORS/blob/main/promesa.png" alt="Escena de Promise Conquerors con reinos antiguos en un entorno histórico, escenario de estrategia y conquista.">
             </div>
-            <div class="stat-row text-stat">
-                <span>KILLS: <strong id="kill-count">0</strong></span>
+            <div class="carousel-item">
+                <img src="https://github.com/EmayFlor/PROMISE-CONQUERORS/blob/main/img%201.png" alt="Videojuego de estrategia ambientado en civilizaciones antiguas.">
             </div>
-            <div class="stat-row text-stat">
-                <span>LIVES: <strong id="lives-count">❤️❤️❤️</strong></span>
+            <div class="carousel-item">
+                <img src="https://github.com/EmayFlor/PROMISE-CONQUERORS/blob/main/img%201.png" alt="Estrategia ambientado en civilizaciones antiguas.">
+            </div>
+            <div class="carousel-item">
+                <img src="https://github.com/EmayFlor/PROMISE-CONQUERORS/blob/main/img%20pueblo.png" alt="Pueblo de Promise Conquerors, un asentamiento en el mundo de civilizaciones antiguas del juego.">
             </div>
         </div>
     </div>
 
-    <!-- CONTROLES EN PANTALLA -->
-    <div id="controls-panel">
-        <div class="control-item"><kbd>W A S D</kbd> Mover / Girar</div>
-        <div class="control-item"><kbd>E</kbd> Atacar</div>
-        <div class="control-item"><kbd>F</kbd> Ocultar Soldado</div>
-        <div class="control-item"><kbd>SPACE</kbd> Pausa</div>
+    <!-- SECCIÓN GAME -->
+    <div class="section-wrapper">
+        <h2 class="section-title">Game</h2>
     </div>
+    <section id="game">
+        <p>
+            Sumérgete en un mundo inspirado en las civilizaciones antiguas del 3000 a.C.
+            Promise Conquerors te lleva a una era de reinos hebreos y árabes, donde
+            la estrategia, la diplomacia y la conquista definen el destino de los pueblos.
+            Construye tu imperio, forja alianzas y lidera a tus tropas en batallas
+            épicas que marcarán la historia.
+        </p>
+    </section>
 
-    <!-- Overlays -->
-    <div id="pause-screen" class="screen hidden">
-        <div class="panel">
-            <h1>GAME PAUSED</h1>
-            <p>Press <strong>SPACEBAR</strong> to resume.</p>
-            <p class="sub text-gold">Will auto-resume in 10 minutes</p>
+    <!-- SECCIÓN QUIÉNES SOMOS -->
+    <div class="section-wrapper">
+        <h2 class="section-title">Quiénes Somos</h2>
+    </div>
+    <section id="quienes-somos">
+        <p>
+            Somos un equipo apasionado por los videojuegos y la historia antigua.
+            Nacimos con la visión de crear una experiencia inmersiva que honre
+            las civilizaciones que sentaron las bases de nuestra cultura.
+            Cada decisión de diseño, cada línea de código y cada pixel está
+            dedicado a traerte un mundo vivo, auténtico y lleno de historia.
+        </p>
+    </section>
+
+    <!-- FOOTER / REDES -->
+    <footer id="redes">
+        <div class="social-icons">
+            <a href="https://www.instagram.com/promiseconquerors.game/" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://x.com/PROMISECONok01" target="_blank" aria-label="X">
+                <i class="fab fa-x-twitter"></i>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61594008731224" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <a href="mailto:gamepromiseconquerors2@gmail.com" aria-label="Mail">
+                <i class="fas fa-envelope"></i>
+            </a>
         </div>
-    </div>
+        <p>&copy; 2026 Promise Conquerors. Todos los derechos reservados.</p>
+    </footer>
 
-    <div id="game-over-screen" class="screen hidden">
-        <div class="panel">
-            <h1 class="text-danger">GAME OVER</h1>
-            <p>Your structural armor damage reached or exceeded 90%!</p>
-            <button onclick="window.location.reload()">REDEPLOY</button>
-        </div>
-    </div>
-
-    <div id="canvas-container"></div>
-    <script src="game.js"></script>
 </body>
 </html>   
