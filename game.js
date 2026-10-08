@@ -1,6 +1,1 @@
 
-
-// ============ INICIO ============
-initGameEngine();
-gameLoop();   
-}
