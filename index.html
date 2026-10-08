@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise Conquerors</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- HUD -->
+    <div id="hud">
+        <div id="stats-panel">
+            <div class="stat-row">
+                <span class="stat-label">ARMOR DAMAGE:</span>
+                <div class="bar-container">
+                    <div id="health-bar"></div>
+                </div>
+                <span id="damage-text" class="damage-text">0%</span>
+            </div>
+            <div class="stat-row text-stat">
+                <span>KILLS: <strong id="kill-count">0</strong></span>
+            </div>
+            <div class="stat-row text-stat">
+                <span>LIVES: <strong id="lives-count">❤️❤️❤️</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTROLES EN PANTALLA -->
+    <div id="controls-panel">
+        <div class="control-item"><kbd>W A S D</kbd> Mover / Girar</div>
+        <div class="control-item"><kbd>E</kbd> Atacar</div>
+        <div class="control-item"><kbd>F</kbd> Ocultar Soldado</div>
+        <div class="control-item"><kbd>SPACE</kbd> Pausa</div>
+    </div>
+
+    <!-- Overlays -->
+    <div id="pause-screen" class="screen hidden">
+        <div class="panel">
+            <h1>GAME PAUSED</h1>
+            <p>Press <strong>SPACEBAR</strong> to resume.</p>
+            <p class="sub text-gold">Will auto-resume in 10 minutes</p>
+        </div>
+    </div>
+
+    <div id="game-over-screen" class="screen hidden">
+        <div class="panel">
+            <h1 class="text-danger">GAME OVER</h1>
+            <p>Your structural armor damage reached or exceeded 90%!</p>
+            <button onclick="window.location.reload()">REDEPLOY</button>
+        </div>
+    </div>
+
+    <div id="canvas-container"></div>
+    <script src="game.js"></script>
+</body>
+</html>   
